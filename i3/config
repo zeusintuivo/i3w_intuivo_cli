@@ -1,0 +1,474 @@
+#
+# Appearance
+#
+
+set $base00 #272822
+set $base01 #393939
+set $base02 #515151
+set $base03 #747369
+set $base04 #a09f93
+set $base05 #d3d0c8
+set $base06 #e8e6df
+set $base07 #f2f0ec
+set $base08 #f2777a
+set $base09 #f99157
+set $base0A #ffcc66
+set $base0B #99cc99
+set $base0C #66cccc
+set $base0D #6699cc
+set $base0E #cc99cc
+set $base0F #d27b53
+
+#                            border  backgnd text    indictr
+client.focused               $base01 $base02 $base07 $base0F
+client.focused_inactive      $base01 $base02 $base03 $base0F
+client.unfocused             $base01 $base01 $base03 $base0F
+client.urgent                $base01 $base01 $base00 $base0F
+
+smart_gaps                   on
+gaps outer                   0
+gaps inner                   2
+
+font pango:                  DejaVuSansMono Nerd Font 10
+hide_edge_borders            both
+# new_window                   pixel 0
+default_border               pixel 0
+
+set $mod                     Mod4
+floating_modifier            $mod
+
+#
+# Keyboard shortcuts
+#
+
+bindsym 	XF86MonBrightnessDown 	exec /home/zeus/_/clis/bash_intuivo_cli/dimscreen -.01
+#bindsym 	XF86MonBrightnessDown 	exec light -U 10 && py3-cmd refresh external_script backlight
+bindsym 	XF86MonBrightnessUp 	exec /home/zeus/_/clis/bash_intuivo_cli/dimscreen +.01
+#bindsym 	XF86MonBrightnessUp 	exec light -A 10 && py3-cmd refresh external_script backlight
+
+bindsym     XF86AudioRaiseVolume    exec pactl set-sink-volume @DEFAULT_SINK@ +5%  # increase sound volume
+bindsym     XF86AudioLowerVolume    exec pactl set-sink-volume @DEFAULT_SINK@ -5%  # decrease sound volume
+bindsym     XF86AudioMute           exec pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+bindsym     XF86AudioPlay           exec mpc toggle
+bindsym     XF86AudioPrev           exec mpc prev
+bindsym     XF86AudioNext           exec mpc next
+
+
+bindsym     $mod+Shift+q            kill
+bindsym     Mod1+F4                 kill
+# bindsym     $mod+Return             exec i3-sensible-terminal
+bindsym     $mod+Return             exec kitty --name ipythonterm -o font_size=14
+bindsym     $mod+Shift+Return       exec kitty --name ipythonterm -o font_size=10
+bindsym     $mod+d                  exec rofi -show drun -lines 10
+# bindsym     Print                   exec ~/.config/scripts/screenshot.sh
+bindsym     Mod1+Sys_Req            exec ~/.config/scripts/screenshot.sh -w
+bindsym     $mod+Insert             exec xclip -o | xclip -selection clipboard                # move primary buffer to clipboard
+
+bindsym     $mod+Shift+c            reload
+bindsym     $mod+Shift+r            restart
+bindsym     $mod+Ctrl+l             exec i3lock -i /home/zeus/Pictures/safe_lock_50.png
+bindsym     $mod+Shift+e            exec ~/.config/scripts/rofi-power.sh
+bindsym     $mod+Shift+z            exec ~/.config/scripts/rofi-sessions-yakuake.sh 
+bindsym     $mod+Ctrl+w            exec ~/.config/scripts/rofi-waterfox-yakuake.sh 
+bindsym     $mod+Ctrl+f            exec ~/.config/scripts/rofi-firefox-yakuake.sh 
+bindsym     $mod+Shift+d            exec ~/.config/scripts/rofi-display.py
+bindsym     $mod+c                  exec ~/.config/scripts/rofi-remmina.py
+bindsym     $mod+Escape             exec --no-startup-id i3-sensible-terminal -name dropdownTerminal
+
+# change focus
+bindsym     $mod+h                  focus left
+bindsym     $mod+j                  focus down
+bindsym     $mod+k                  focus up
+bindsym     $mod+l                  focus right
+
+# alternatively, you can use the cursor keys:
+bindsym     $mod+Left               focus left
+bindsym     $mod+Down               focus down
+bindsym     $mod+Up                 focus up
+bindsym     $mod+Right              focus right
+
+# move focused windowmartas@justreadtheinstructions ~
+bindsym     $mod+Shift+j            move left
+bindsym     $mod+Shift+k            move down
+bindsym     $mod+Shift+l            move up
+bindsym     $mod+Shift+semicolon    move right
+
+# alternatively, you can use the cursor keys:
+bindsym     $mod+Shift+Left         move left
+bindsym     $mod+Shift+Down         move down
+bindsym     $mod+Shift+Up           move up
+bindsym     $mod+Shift+Right        move right
+
+bindsym     $mod+Ctrl+Left          move workspace to output left
+bindsym     $mod+Ctrl+Right         move workspace to output right
+
+# Vim like splitting
+bindsym     $mod+s                  split h
+bindsym     $mod+v                  split v
+bindsym     $mod+f                  fullscreen toggle
+
+bindsym     $mod+w                  layout stacking
+bindsym     $mod+t                  layout tabbed
+bindsym     $mod+e                  layout toggle split
+# bindsym     $mod+Shift+space        floating toggle
+
+# change focus between tiling / floating windows
+# bindsym     $mod+space              focus mode_toggle
+
+# focus the parent container
+bindsym     $mod+a                  focus parent
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym Ctrl+Alt+q workspace 11
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+bindsym Ctrl+Shift+Alt+q move container to workspace 10
+
+
+# Open applications on specific workspaces
+assign [class="(?i)keybase"]               workspace 1
+assign [class="(?i)bitcoin"]                   workspace 2
+assign [class="(?i)firefox\ -p\ bitcoin"]                   workspace 2
+assign [class="(?i)firefox -p bitcoin"]                   workspace 2
+# assign [class="(?i)firefox"]                   workspace 5
+assign [class="(?i)firefox\ -p\ youtube"]                   workspace 8
+assign [class="(?i)masterpdfeditor"]                   workspace 6
+assign [class="(?i)firefox -p youtube"]                   workspace 8
+assign [class="(?i)firefox -p ue"]                   workspace 9
+assign [class="(?i)ue"]                   workspace 9
+assign [class="(?i)youtube"]                   workspace 8
+assign [class="(?i)fiverr"]                   workspace 7
+assign [class="(?i)firefox\ -p\ fiverr"]                   workspace 7
+assign [class="(?i)firefox -p fiverr"]                   workspace 7
+assign [class="(?i)spiced"]                   workspace 11
+# assign [class="(?i)guake"]                   workspace 3
+# assign [class="(?i)yakuake"]                   workspace 3
+assign [class="(?i)phpstorm"]                   workspace 3
+assign [class="(?i)thunderbird"]                   workspace 4
+assign [class="(?i)firefox\ -p\ spiced"]                   workspace 8
+assign [class="(?i)firefox -p spiced"]                   workspace 8
+assign [class="(?i)spiced"]                   workspace 8
+assign [class="(?i)firefox\ -p\ ue"]                   workspace 9
+assign [class="(?i)signal"]                   workspace 10
+assign [class="(?i)telegram"]                   workspace 10
+assign [class="(?i)whatsapp-desktop-linux"]                   workspace 10
+assign [class="(?i)whatsdesk"]                   workspace 10
+assign [class="(?i)WhatsDesk"]                   workspace 10
+assign [class="(?i)Franz"]                   workspace 10
+assign [class="(?i)slack"]                   workspace 10
+assign [class="(?i)discord"]                   workspace 10
+assign [class="(?i)Discord"]                   workspace 10
+
+for_window [class="(?i)keybase"]                workspace 1
+for_window [class="(?i)spiced"]                workspace 8
+for_window [class="(?i)firefox"]                workspace 2
+for_window [class="(?i)bitcoin"]                workspace 2
+for_window [class="(?i)ue"]                workspace 9
+# for_window [class="(?i)guake"]                workspace 3
+# for_window [class="(?i)yakuake"]                workspace 3
+for_window [class="(?i)phpstorm"]                workspace 3
+for_window [class="(?i)thunderbird"]                workspace 4
+for_window [class="(?i)discord"]                workspace 10
+for_window [class="(?i)Discord"]                workspace 10
+for_window [class="(?i)slack"]                workspace 10
+for_window [class="(?i)Slack"]                workspace 10
+for_window [class="(?i)signal"]                workspace 10
+for_window [class="(?i)telegram"]                workspace 10
+for_window [class="(?i)whatsapp-desktop-linux"]                workspace 10
+for_window [class="(?i)whatsdesk"]                workspace 10
+for_window [class="(?i)WhatsDesk"]                workspace 10
+for_window [class="(?i)arbeitsagentur"]                workspace 10
+
+# bindsym $mod+Shift+masculine        exec kitty --name ipythonterm -o font_size=22 -e $launcher-python-term -q
+bindsym $mod+Shift+masculine        exec kitty --name ipythonterm -o font_size=22 
+bindsym $mod+masculine              [instance=$python-term] scratchpad show; move position center
+bindsym $mod+Shift+plus             exec kitty --name tmpnotes -e $launcher-temp-notes
+bindsym $mod+p                      [class="Audacious"] scratchpad show; move position center
+bindsym $mod+Ctrl+Shift+Left        scratchpad show; move position cursor
+bindsym $mod+Ctrl+Shift+Right       scratchpad show; move position pointer
+bindsym $mod+Shift+p                exec audacious
+bindsym Print --release             exec flameshot gui --path $screenshots-folder
+bindsym mod1+F3                     exec kitty -e htop
+
+
+# Open specific applications in floating mode
+for_window [class="(?i)kitty"]   floating enable border pixel 5
+for_window [class="(?i)1password"]   floating enable border pixel 5
+for_window [class="(?i)1Password-BrowserSupport"]   floating enable border pixel 5
+for_window [class="(?i)virtualbox"]   floating enable border pixel 5
+for_window [class="GParted"]          floating enable border pixel 5
+for_window [class="Lightdm-settings"] floating enable pixel 5
+for_window [class="Lxappearance"]     floating enable sticky enable border pixel 5
+for_window [class="Nitrogen"]         floating enable sticky enable border pixel 5
+for_window [title="File Transfer*"]   floating enable border pixel 5
+for_window [title="alsamixer"]        floating enable border pixel 5
+for_window [class="(?i)zoom"]         floating enable border pixel 5
+for_window [class="(?i)signal"] floating enable border pixel 5
+for_window [class="(?i)telegram"]   floating enable border pixel 5
+for_window [class="(?i)whatsapp-desktop-linux"]    floating enable border pixel 5
+for_window [class="(?i)whatsdesk"]    floating enable border pixel 5
+for_window [class="(?i)WhatsDesk"]    floating enable border pixel 5
+for_window [class="(?i)slack"] floating enable border pixel 5
+for_window [class="(?i)discord"] floating enable border pixel 5
+
+
+
+
+
+bindsym     $mod+i          mode "Language 1.us 2.fi 3.no 4.de 5.es"
+mode "Language 1.us 2.fi 3.no 4.de 5.es" {
+    bindsym 1         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set us
+    bindsym 2         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set fi
+    bindsym 3         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set no
+    bindsym 4         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set de
+    bindsym 5         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set es
+
+    bindsym     $mod+i           mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+bindsym $mod+Ctrl+1         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set us
+bindsym $mod+Ctrl+2         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set fi
+bindsym $mod+Ctrl+3         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set no
+bindsym $mod+Ctrl+4         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set de
+bindsym $mod+Ctrl+5         exec /home/zeus/_/clis/i3w_intuivo_cli/i3-keyboard-layout set es
+
+
+
+bindsym     $mod+r          mode "Resize"
+
+mode "Resize" {
+    bindsym h           resize grow     width  10 px or 10 ppt
+    bindsym j           resize shrink   height 10 px or 10 ppt
+    bindsym k           resize grow     height 10 px or 10 ppt
+    bindsym l           resize shrink   width  10 px or 10 ppt
+
+    bindsym Left        resize grow     width  10 px or 10 ppt
+    bindsym Down        resize shrink   height 10 px or 10 ppt
+    bindsym Up          resize grow     height 10 px or 10 ppt
+    bindsym Right       resize shrink   width  10 px or 10 ppt
+    bindsym     $mod+r           mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
+assign [class="(?i)firefox -p ue"]                   workspace 9
+for_window [class="(?i)firefox -p ue"]                workspace 9
+
+
+
+
+bindsym     $mod+Shift+a          mode "Apps"
+
+mode "Apps" {
+    bindsym f   exec firefox -p  
+    bindsym w   exec $HOME/_/software/waterfox/waterfox -p
+    bindsym v   exec bcompare $HOME/_/work/velophil/projects/velophil.local/ profile:p286261@velophil.berlin?html/
+    bindsym g   exec guake
+    bindsym k   exec run_keybase
+    bindsym t   exec thunderbird
+    bindsym p   exec projectlibre
+    # bindsym s   exec signal-desktop
+    bindsym y   exec yakuake
+    bindsym n   exec nautilus 
+    bindsym     $mod+Shift+a  mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym     $mod+Shift+f          mode "Firefox"
+
+mode "Firefox" {
+    bindsym f   exec firefox -p
+    bindsym u   exec firefox -p ue
+    bindsym o   exec firefox -p osu
+    bindsym w   exec firefox -p wise
+    bindsym v   exec firefox -p volksbank
+    bindsym c   exec firefox -p estonia
+    bindsym a   exec firefox -p arbeitsagentur
+    bindsym l   exec firefox -p linkedin
+    bindsym i   exec firefox -p laurea
+    bindsym b   exec firefox -p bitcoin
+    bindsym x   exec firefox -p xing
+    bindsym j   exec firefox -p jesus_face
+    bindsym z   exec firefox -p zeus_face
+    bindsym y   exec firefox -p youtube
+    bindsym e   exec firefox -p "gmail jesus"
+    bindsym s   exec firefox -p sparebank
+    bindsym $mod+Shift+f  mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
+
+bindsym     $mod+Shift+w          mode "Waterfox"
+
+mode "Waterfox" {
+    bindsym u   exec $HOME/_/software/waterfox/waterfox -p ue
+    bindsym o   exec $HOME/_/software/waterfox/waterfox -p osu
+    bindsym w   exec $HOME/_/software/waterfox/waterfox -p wise
+    bindsym v   exec $HOME/_/software/waterfox/waterfox -p volksbank
+    bindsym c   exec $HOME/_/software/waterfox/waterfox -p companio
+    bindsym a   exec $HOME/_/software/waterfox/waterfox -p arbeitsagentur
+    bindsym l   exec $HOME/_/software/waterfox/waterfox -p linkedin
+    bindsym i   exec $HOME/_/software/waterfox/waterfox -p laurea
+    bindsym 1   exec $HOME/_/software/waterfox/waterfox -p laurea_latin
+    bindsym 2   exec $HOME/_/software/waterfox/waterfox -p laurea_future
+    bindsym 3   exec $HOME/_/software/waterfox/waterfox -p laurea_data
+    bindsym 4   exec $HOME/_/software/waterfox/waterfox -p laurea_service
+    bindsym 5   exec $HOME/_/software/waterfox/waterfox -p laurea_finish
+    bindsym 6   exec $HOME/_/software/waterfox/waterfox -p laurea_lab
+    bindsym 7   exec $HOME/_/software/waterfox/waterfox -p laurea_migri
+    bindsym b   exec $HOME/_/software/waterfox/waterfox -p bitcoin
+    bindsym x   exec $HOME/_/software/waterfox/waterfox -p xing
+    bindsym j   exec $HOME/_/software/waterfox/waterfox -p jesus_face
+    bindsym z   exec $HOME/_/software/waterfox/waterfox -p zeus_face
+    bindsym y   exec $HOME/_/software/waterfox/waterfox -p youtube
+    bindsym e   exec $HOME/_/software/waterfox/waterfox -p gmail_jesus
+    bindsym s   exec $HOME/_/software/waterfox/waterfox -p laura_face
+    bindsym n   exec $HOME/_/software/waterfox/waterfox -p sparebank
+    bindsym $mod+Shift+w  mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+bindsym $mod+Shift+b mode "Brightness"
+mode "Brightness" {
+    bindsym 0 exec dimscreen 0    
+    bindsym 1 exec dimscreen .10
+    bindsym 2 exec dimscreen .20
+    bindsym 3 exec dimscreen .30
+    bindsym 4 exec dimscreen .40
+    bindsym 5 exec dimscreen .50
+    bindsym 6 exec dimscreen .60
+    bindsym 7 exec dimscreen .70
+    bindsym 8 exec dimscreen .80
+    bindsym 9 exec dimscreen .90
+    bindsym Left   exec dimscreen -.05
+    bindsym Right  exec dimscreen +.05
+    bindsym Up     exec dimscreen +.01
+    bindsym Down   exec dimscreen -.01
+    bindsym $mod+Shift+b mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+t exec --no-startup-id ~/.config/scripts/rofi-wifi.sh
+#
+# Status bar
+#
+
+bar {
+    status_command      py3status -n .5
+    i3bar_command       i3bar
+    separator_symbol    " | "
+
+    colors {
+        background              $base00
+
+        #                       border  backgnd text    indictr
+        focused_workspace       $base00 $base00 $base07 $base0F
+        inactive_workspace      $base00 $base00 $base03 $base0F
+        active_workspace        $base00 $base00 $base03 $base0F
+        urgent_workspace        $base08 $base08 $base00 $base0F
+    }
+}
+
+#
+# App windows settings
+#
+
+for_window [class="vlc"]                fullscreen enable
+for_window [class="mpv"]                fullscreen enable
+for_window [class="Zathura"]            fullscreen enable
+for_window [class="Pavucontrol"]        floating enable
+
+
+for_window [instance="dropdownTerminal"] floating enable
+for_window [instance="dropdownTerminal"] resize set 1000 600
+for_window [instance="dropdownTerminal"] move position center
+
+
+#
+# Run following scipt on start
+#
+#
+#workspace 1 output eDP-1
+#workspace 2 output eDP-1
+#workspace 3 output eDP-1
+#workspace 4 output eDP-1
+#workspace 5 output eDP-1
+#workspace 6 output eDP-1
+#workspace 7 output eDP-1
+#workspace 8 output DP-1
+#workspace 9 output DP-1
+
+exec run_keybase
+# exec firefox -p bitcoin
+# exec guake
+# exec firefox -p ue
+# exec firefox -p laurea
+# exec firefox -p osu
+# exec firefox -p fiverr
+# exec firefox -p meetup
+# exec firefox -p spiced
+# exec guake
+exec yakuake
+# exec  $HOME/_/software/phpstorm/bin/phpstorm.sh
+# exec  $HOME/_/software/pycharm/bin/pycharm.sh
+# exec  $HOME/_/software/rubymine/bin/rubymine.sh
+# exec  thunderbird                   
+# exec signal-desktop
+exec telegram-desktop 
+exec whatsdesk
+exec slack
+# exec Discord
+exec signal-desktop
+# exec discord
+# exec /snap/whatsdesk/28/whatsdesk --type=zygote --no-zygote-sandbox --no-sandbox
+# exec /snap/slack/113/usr/lib/slack/slack --type=zygote --no-zygote-sandbox --no-sandbox
+# exec /snap/discord/163/usr/share/discord/Discord --type=gpu-process --disable-seccomp-filter-sandbox --no-sandbox --crashpad-handler-pid=407082 --enable-crash-reporter=103389fd-9a70-4c2d-a3f6-119015544711,no_channel --user-data-dir=/home/zeus/snap/discord/163/.config/discord --gpu-preferences=WAAAAAAAAAAgAAAIAAAAAAAAAAAAAAAAAABgAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --shared-files --field-trial-handle=0,i,17001366016573607947,18150268065968590662,131072 --disable-features=HardwareMediaKeyHandling,MediaSessionService,SpareRendererForSitePerProcess,WinRetrieveSuggestionsOnlyOnDemand
+# exec /usr/lib64/electron/electron --use-tray-icon /usr/libexec/signal-desktop
+# exec /var/lib/flatpak/app/io.github.mimbrero.WhatsAppDesktop/x86_64/stable/5b1f5a4abd27183e1a6517f866404e77088748002bebdad2b4e868c055c64bb2/files/whatsapp-desktop-linux/whatsapp-desktop-linux
+# exec /var/lib/flatpak/app/io.github.mimbrero.WhatsAppDesktop/x86_64/stable/9240a1cce7ff3abe9f764980ee35fbeb884e6ac0c15c1ed76e060eea62d1ca22/files/whatsapp-desktop-linux/whatsapp-desktop-linux 
+# exec /opt/master-pdf-editor-5/masterpdfeditor5 /keybase/private/jesusalc/books_to_read/books_to_read/erlang_in_anger.pdf
+# exec /opt/master-pdf-editor-5/masterpdfeditor5 /home/zeus/Documents/bucher/ruby/agile-web-development-with-rails-7.pdf
+# exec slack
+# exec /home/zeus/_/software/franz/Franz-5.10.0.AppImage
+# exec /usr/bin/flatpak run --branch=beta --arch=x86_64 --command=discord-canary com.discordapp.DiscordCanary
+
+exec /usr/bin/flameshot 
+
+# exec /home/zeus/yakuake_sessions
+
+exec --no-startup-id /home/zeus/.config/scripts/autostart.sh
+
+
+
