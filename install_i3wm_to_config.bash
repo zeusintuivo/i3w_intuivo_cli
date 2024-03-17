@@ -29,7 +29,7 @@ Thunar"
 	{
 		[[ -z "${one}" ]] && continue
 		[[ -e "${HOME}/.config/${one}" ]] && continue
-    ln -s "${cwd}/${one}"  <-- "${HOME}/.config/${one}"
+    ln -s "${cwd}/${one}"  "${HOME}/.config/${one}"
 	} done <<< "${lista}"
   local -i _err=0
   if [[ -e "${HOME}/.config/i3/config" ]]; then 
