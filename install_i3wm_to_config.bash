@@ -36,7 +36,7 @@ Thunar"
 	{
 		cp "${HOME}/.config/i3/config" "${HOME}/.config/i3/config.bk.${CURRENTDATE}${CURRENTTIME}"
     _err=$?
-		if [ ${_err} -gt 0 ] then 
+		if [ ${_err} -gt 0 ]; then 
 		{
       echo "error saving copy err=$_err"
 			return 1
@@ -47,7 +47,7 @@ Thunar"
   
 	cp "${cwd}/i3/config"  "${HOME}/.config/i3/config"
   _err=$?
-  if [ ${_err} -gt 0 ] then
+  if [ ${_err} -gt 0 ]; then
   {
     echo "error making ${cwd}/i3/config  ${HOME}/.config/i3/config  err=$_err"
     return 1
