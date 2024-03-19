@@ -46,13 +46,24 @@ Thunar"
 	fi
   
 	cp "${cwd}/i3/config"  "${HOME}/.config/i3/config"
-  _err=$?
+	_err=$?
   if [ ${_err} -gt 0 ]; then
   {
     echo "error making ${cwd}/i3/config  ${HOME}/.config/i3/config  err=$_err"
     return 1
   }
   fi
+  # chown -R "${USER}" "${HOME}/.config/i3"
+  # file_exists_with_spaces 
+  sed -i -e 's@'"/home/zeus"'@'"$HOME"'@g' "${HOME}/.config/i3/config"
+  _err=$?
+ 	if [ ${_err} -gt 0 ]; then
+  {
+    echo "error changing ${HOME}/.config/i3/config text to /home/zeus to $HOME err=$_err"
+    return 1
+  }
+  fi
+  
 	return 0 
 } # end instalar
 
