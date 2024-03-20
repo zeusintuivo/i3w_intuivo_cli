@@ -29,6 +29,10 @@ Thunar"
 	{
 		[[ -z "${one}" ]] && continue
 		[[ -e "${HOME}/.config/${one}" ]] && continue
+		[[ -f "${HOME}/.config/${one}" ]] && continue
+		[[ -s "${HOME}/.config/${one}" ]] && continue
+		[[ -L "${HOME}/.config/${one}" ]] && continue
+		[[ -d "${HOME}/.config/${one}" ]] && continue
     ln -s "${cwd}/${one}"  "${HOME}/.config/${one}"
 	} done <<< "${lista}"
   local -i _err=0
