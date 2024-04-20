@@ -1,0 +1,276 @@
+[
+    {
+        "label": "print_function",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "Popen",
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "isExtraImport": true,
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "PIPE",
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "isExtraImport": true,
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "Popen",
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "isExtraImport": true,
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "PIPE",
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "isExtraImport": true,
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "ConfigParser",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "ConfigParser",
+        "description": "ConfigParser",
+        "detail": "ConfigParser",
+        "documentation": {}
+    },
+    {
+        "label": "VALID_EXTS",
+        "kind": 5,
+        "importPath": "scripts.imageview",
+        "description": "scripts.imageview",
+        "peekOfCode": "VALID_EXTS = [\n        \"jpg\",\n        \"gif\",\n        \"jpeg\",\n        \"png\",\n        \"tiff\",\n        \"tif\",\n        \"tga\",\n        \"targa\",\n        \"bmp\",",
+        "detail": "scripts.imageview",
+        "documentation": {}
+    },
+    {
+        "label": "first_image",
+        "kind": 5,
+        "importPath": "scripts.imageview",
+        "description": "scripts.imageview",
+        "peekOfCode": "first_image = os.path.abspath(first_image)\ndirectory = os.path.dirname(first_image)\npre = []\npost = []\nat = False\nfor fname in sorted(os.listdir(directory)):\n    if os.path.splitext(fname)[1].lower().lstrip(\".\") not in VALID_EXTS:\n        continue\n    fname = os.path.join(directory, fname)\n    if fname == first_image:",
+        "detail": "scripts.imageview",
+        "documentation": {}
+    },
+    {
+        "label": "directory",
+        "kind": 5,
+        "importPath": "scripts.imageview",
+        "description": "scripts.imageview",
+        "peekOfCode": "directory = os.path.dirname(first_image)\npre = []\npost = []\nat = False\nfor fname in sorted(os.listdir(directory)):\n    if os.path.splitext(fname)[1].lower().lstrip(\".\") not in VALID_EXTS:\n        continue\n    fname = os.path.join(directory, fname)\n    if fname == first_image:\n        at = True",
+        "detail": "scripts.imageview",
+        "documentation": {}
+    },
+    {
+        "label": "pre",
+        "kind": 5,
+        "importPath": "scripts.imageview",
+        "description": "scripts.imageview",
+        "peekOfCode": "pre = []\npost = []\nat = False\nfor fname in sorted(os.listdir(directory)):\n    if os.path.splitext(fname)[1].lower().lstrip(\".\") not in VALID_EXTS:\n        continue\n    fname = os.path.join(directory, fname)\n    if fname == first_image:\n        at = True\n        continue",
+        "detail": "scripts.imageview",
+        "documentation": {}
+    },
+    {
+        "label": "post",
+        "kind": 5,
+        "importPath": "scripts.imageview",
+        "description": "scripts.imageview",
+        "peekOfCode": "post = []\nat = False\nfor fname in sorted(os.listdir(directory)):\n    if os.path.splitext(fname)[1].lower().lstrip(\".\") not in VALID_EXTS:\n        continue\n    fname = os.path.join(directory, fname)\n    if fname == first_image:\n        at = True\n        continue\n    if at:",
+        "detail": "scripts.imageview",
+        "documentation": {}
+    },
+    {
+        "label": "at",
+        "kind": 5,
+        "importPath": "scripts.imageview",
+        "description": "scripts.imageview",
+        "peekOfCode": "at = False\nfor fname in sorted(os.listdir(directory)):\n    if os.path.splitext(fname)[1].lower().lstrip(\".\") not in VALID_EXTS:\n        continue\n    fname = os.path.join(directory, fname)\n    if fname == first_image:\n        at = True\n        continue\n    if at:\n        pre.append(os.path.abspath(fname))",
+        "detail": "scripts.imageview",
+        "documentation": {}
+    },
+    {
+        "label": "cmd",
+        "kind": 5,
+        "importPath": "scripts.imageview",
+        "description": "scripts.imageview",
+        "peekOfCode": "cmd = [\"feh\", \"-FB\", \"black\", \"-q\", \"--draw-tinted\", \"--auto-rotate\"]\ncmd.append(first_image)\ncmd.extend(pre)\ncmd.extend(post)\np = subprocess.Popen(cmd)\np.wait()",
+        "detail": "scripts.imageview",
+        "documentation": {}
+    },
+    {
+        "label": "p",
+        "kind": 5,
+        "importPath": "scripts.imageview",
+        "description": "scripts.imageview",
+        "peekOfCode": "p = subprocess.Popen(cmd)\np.wait()",
+        "detail": "scripts.imageview",
+        "documentation": {}
+    },
+    {
+        "label": "layout_dir",
+        "kind": 5,
+        "importPath": "scripts.rofi-display",
+        "description": "scripts.rofi-display",
+        "peekOfCode": "layout_dir = os.path.expanduser(\"~/.screenlayout\")\nfdict = dict()\nfor f in os.listdir(layout_dir):\n    fp = os.path.join(layout_dir, f)\n    n = os.path.splitext(f)[0]\n    fdict[n] = fp\nlines = max(min(15, len(fdict)), 1);\nwidth = len(max(fdict.keys(), key=len))\nrofi = Popen([\n            \"rofi\",",
+        "detail": "scripts.rofi-display",
+        "documentation": {}
+    },
+    {
+        "label": "fdict",
+        "kind": 5,
+        "importPath": "scripts.rofi-display",
+        "description": "scripts.rofi-display",
+        "peekOfCode": "fdict = dict()\nfor f in os.listdir(layout_dir):\n    fp = os.path.join(layout_dir, f)\n    n = os.path.splitext(f)[0]\n    fdict[n] = fp\nlines = max(min(15, len(fdict)), 1);\nwidth = len(max(fdict.keys(), key=len))\nrofi = Popen([\n            \"rofi\",\n            \"-i\", \"-dmenu\",",
+        "detail": "scripts.rofi-display",
+        "documentation": {}
+    },
+    {
+        "label": "lines",
+        "kind": 5,
+        "importPath": "scripts.rofi-display",
+        "description": "scripts.rofi-display",
+        "peekOfCode": "lines = max(min(15, len(fdict)), 1);\nwidth = len(max(fdict.keys(), key=len))\nrofi = Popen([\n            \"rofi\",\n            \"-i\", \"-dmenu\",\n            \"-l\", str(lines),\n            \"-width\", str(width),\n            \"-p\", \"display configuration\"\n        ],\n        stdout=PIPE,",
+        "detail": "scripts.rofi-display",
+        "documentation": {}
+    },
+    {
+        "label": "width",
+        "kind": 5,
+        "importPath": "scripts.rofi-display",
+        "description": "scripts.rofi-display",
+        "peekOfCode": "width = len(max(fdict.keys(), key=len))\nrofi = Popen([\n            \"rofi\",\n            \"-i\", \"-dmenu\",\n            \"-l\", str(lines),\n            \"-width\", str(width),\n            \"-p\", \"display configuration\"\n        ],\n        stdout=PIPE,\n        stdin=PIPE",
+        "detail": "scripts.rofi-display",
+        "documentation": {}
+    },
+    {
+        "label": "rofi",
+        "kind": 5,
+        "importPath": "scripts.rofi-display",
+        "description": "scripts.rofi-display",
+        "peekOfCode": "rofi = Popen([\n            \"rofi\",\n            \"-i\", \"-dmenu\",\n            \"-l\", str(lines),\n            \"-width\", str(width),\n            \"-p\", \"display configuration\"\n        ],\n        stdout=PIPE,\n        stdin=PIPE\n    )",
+        "detail": "scripts.rofi-display",
+        "documentation": {}
+    },
+    {
+        "label": "selected",
+        "kind": 5,
+        "importPath": "scripts.rofi-display",
+        "description": "scripts.rofi-display",
+        "peekOfCode": "selected = rofi.communicate(\n        \"\\n\" \\\n        .join(sorted(fdict.keys())) \\\n        .encode(\"utf-8\"))[0] \\\n        .decode(\"utf-8\") \\\n        .strip()\nrofi.wait()\nr = subprocess.Popen([fdict[selected]])\nr.wait()",
+        "detail": "scripts.rofi-display",
+        "documentation": {}
+    },
+    {
+        "label": "r",
+        "kind": 5,
+        "importPath": "scripts.rofi-display",
+        "description": "scripts.rofi-display",
+        "peekOfCode": "r = subprocess.Popen([fdict[selected]])\nr.wait()",
+        "detail": "scripts.rofi-display",
+        "documentation": {}
+    },
+    {
+        "label": "remmina_dir",
+        "kind": 5,
+        "importPath": "scripts.rofi-remmina",
+        "description": "scripts.rofi-remmina",
+        "peekOfCode": "remmina_dir = os.path.expanduser(\"~/.local/share/remmina\")\nfdict = dict()\nfor f in os.listdir(remmina_dir):\n    fp = os.path.join(remmina_dir, f)\n    c = ConfigParser.ConfigParser()\n    c.read(fp)\n    n = c.get('remmina', 'name')\n    fdict[n] = fp\nlines = max(min(15, len(fdict)), 1);\nwidth = len(max(fdict.keys(), key=len))",
+        "detail": "scripts.rofi-remmina",
+        "documentation": {}
+    },
+    {
+        "label": "fdict",
+        "kind": 5,
+        "importPath": "scripts.rofi-remmina",
+        "description": "scripts.rofi-remmina",
+        "peekOfCode": "fdict = dict()\nfor f in os.listdir(remmina_dir):\n    fp = os.path.join(remmina_dir, f)\n    c = ConfigParser.ConfigParser()\n    c.read(fp)\n    n = c.get('remmina', 'name')\n    fdict[n] = fp\nlines = max(min(15, len(fdict)), 1);\nwidth = len(max(fdict.keys(), key=len))\nrofi = Popen([\"rofi\", \"-i\", \"-dmenu\", \\",
+        "detail": "scripts.rofi-remmina",
+        "documentation": {}
+    },
+    {
+        "label": "lines",
+        "kind": 5,
+        "importPath": "scripts.rofi-remmina",
+        "description": "scripts.rofi-remmina",
+        "peekOfCode": "lines = max(min(15, len(fdict)), 1);\nwidth = len(max(fdict.keys(), key=len))\nrofi = Popen([\"rofi\", \"-i\", \"-dmenu\", \\\n              \"-l\", str(lines), \"-width\", str(width), \\\n              \"-p\", \"connection\"], stdout=PIPE, stdin=PIPE)\nselected = rofi.communicate(\"\\n\" \\\n                            .join(sorted(fdict.keys())) \\\n                            .encode(\"utf-8\"))[0] \\\n               .decode(\"utf-8\") \\\n               .strip()",
+        "detail": "scripts.rofi-remmina",
+        "documentation": {}
+    },
+    {
+        "label": "width",
+        "kind": 5,
+        "importPath": "scripts.rofi-remmina",
+        "description": "scripts.rofi-remmina",
+        "peekOfCode": "width = len(max(fdict.keys(), key=len))\nrofi = Popen([\"rofi\", \"-i\", \"-dmenu\", \\\n              \"-l\", str(lines), \"-width\", str(width), \\\n              \"-p\", \"connection\"], stdout=PIPE, stdin=PIPE)\nselected = rofi.communicate(\"\\n\" \\\n                            .join(sorted(fdict.keys())) \\\n                            .encode(\"utf-8\"))[0] \\\n               .decode(\"utf-8\") \\\n               .strip()\nrofi.wait()",
+        "detail": "scripts.rofi-remmina",
+        "documentation": {}
+    },
+    {
+        "label": "rofi",
+        "kind": 5,
+        "importPath": "scripts.rofi-remmina",
+        "description": "scripts.rofi-remmina",
+        "peekOfCode": "rofi = Popen([\"rofi\", \"-i\", \"-dmenu\", \\\n              \"-l\", str(lines), \"-width\", str(width), \\\n              \"-p\", \"connection\"], stdout=PIPE, stdin=PIPE)\nselected = rofi.communicate(\"\\n\" \\\n                            .join(sorted(fdict.keys())) \\\n                            .encode(\"utf-8\"))[0] \\\n               .decode(\"utf-8\") \\\n               .strip()\nrofi.wait()\nr = Popen([\"remmina\", \"-c\", fdict[selected]])",
+        "detail": "scripts.rofi-remmina",
+        "documentation": {}
+    },
+    {
+        "label": "selected",
+        "kind": 5,
+        "importPath": "scripts.rofi-remmina",
+        "description": "scripts.rofi-remmina",
+        "peekOfCode": "selected = rofi.communicate(\"\\n\" \\\n                            .join(sorted(fdict.keys())) \\\n                            .encode(\"utf-8\"))[0] \\\n               .decode(\"utf-8\") \\\n               .strip()\nrofi.wait()\nr = Popen([\"remmina\", \"-c\", fdict[selected]])\nr.wait()",
+        "detail": "scripts.rofi-remmina",
+        "documentation": {}
+    },
+    {
+        "label": "r",
+        "kind": 5,
+        "importPath": "scripts.rofi-remmina",
+        "description": "scripts.rofi-remmina",
+        "peekOfCode": "r = Popen([\"remmina\", \"-c\", fdict[selected]])\nr.wait()",
+        "detail": "scripts.rofi-remmina",
+        "documentation": {}
+    }
+]

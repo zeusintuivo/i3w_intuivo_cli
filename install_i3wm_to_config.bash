@@ -5,27 +5,27 @@
 
 function instalar() {
 	local lista="alacritty
-autorandr
-dunst
-flameshot
-i3
-i3-dot-files
-i3-keyboard-layout
-i3status
-install_i3wm_to_config.bash
-kitty
-mpd
-mpv
-pipewire-media-session
-polybar
-rofi
-scripts
-Thunar"
+		autorandr
+		dunst
+		flameshot
+		i3
+		i3-dot-files
+		i3-keyboard-layout
+		i3status
+		install_i3wm_to_config.bash
+		kitty
+		mpd
+		mpv
+		pipewire-media-session
+		polybar
+		rofi
+		scripts
+		Thunar"
   local one=""
 	local cwd="$(pwd)"
   local CURRENTDATE=$(date +%Y%m%d%H%M)
 	local CURRENTTIME="$(date +%H:%M)"
-	while read -r one ; do 
+	while read -r one ; do
 	{
 		[[ -z "${one}" ]] && continue
 		[[ -e "${HOME}/.config/${one}" ]] && continue
@@ -36,11 +36,11 @@ Thunar"
     ln -s "${cwd}/${one}"  "${HOME}/.config/${one}"
 	} done <<< "${lista}"
   local -i _err=0
-  if [[ -e "${HOME}/.config/i3/config" ]]; then 
+  if [[ -e "${HOME}/.config/i3/config" ]]; then
 	{
 		cp "${HOME}/.config/i3/config" "${HOME}/.config/i3/config.bk.${CURRENTDATE}${CURRENTTIME}"
     _err=$?
-		if [ ${_err} -gt 0 ]; then 
+		if [ ${_err} -gt 0 ]; then
 		{
       echo "error saving copy err=$_err"
 			return 1
@@ -48,17 +48,27 @@ Thunar"
 		fi
 	}
 	fi
-  
-	cp "${cwd}/i3/config"  "${HOME}/.config/i3/config"
+
+  local _msg=""
+  echo "cp \"${cwd}/i3/config\"  \"${HOME}/.config/i3/config\""
+	_msg=$(cp "${cwd}/i3/config"  "${HOME}/.config/i3/config" 2>&1 )
 	_err=$?
   if [ ${_err} -gt 0 ]; then
   {
-    echo "error making ${cwd}/i3/config  ${HOME}/.config/i3/config  err=$_err"
-    return 1
+		if [[ "${_msg}" == *"are the same file"*  ]] ; then
+		{
+			echo ""
+		}
+		else
+		{
+      echo "error making ${cwd}/i3/config  ${HOME}/.config/i3/config  err=$_err"
+      return 1
+		}
+		fi
   }
   fi
   # chown -R "${USER}" "${HOME}/.config/i3"
-  # file_exists_with_spaces 
+  # file_exists_with_spaces
   sed -i -e 's@'"/home/zeus"'@'"$HOME"'@g' "${HOME}/.config/i3/config"
   _err=$?
  	if [ ${_err} -gt 0 ]; then
@@ -67,10 +77,10 @@ Thunar"
     return 1
   }
   fi
-  
-	return 0 
+
+	return 0
 } # end instalar
 
-instalar 
+instalar
 
 
