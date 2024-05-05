@@ -21,7 +21,7 @@ if [[ -z "${list_of_files:-}" ]] ; then
 fi
 
 
-chosen=$(echo -n "${list_of_files:-}"  | rofi -dmenu -i -p "Yakuake session config" -no-custom)
+chosen=$(echo -n "${list_of_files:-}"  | rofi -dmenu -i -p "Guake session config" -no-custom)
 if [[ -z "${chosen:-}" ]]; then
 {
   # If we have not chosen a network, the previous command will return an empty string
@@ -29,15 +29,15 @@ if [[ -z "${chosen:-}" ]]; then
   exit 1
 }
 fi
-file_yakuake_list="${HOME}/yakuake_sessions_${chosen}_list" 
-if [[ -e "${file_yakuake_list}" ]]; then
+file_guake_list="${HOME}/yakuake_sessions_${chosen}_list" 
+if [[ -e "${file_guake_list}" ]]; then
 {
-  touch "${file_yakuake_list}"
-	yakuake_sessions "${file_yakuake_list}" 
+  touch "${file_guake_list}"
+	guake_sessions "${file_guake_list}" 
   _err=$?
 	if [ ${_err} -gt 0 ] ; then 
 	{
-		notify-send "Caffeine" "Failed to run ${file_yakuake_list}"
+		notify-send "Caffeine" "Failed to run ${file_guake_list}"
 		exit 1
 	}
   else
@@ -48,7 +48,7 @@ if [[ -e "${file_yakuake_list}" ]]; then
 }
 else
 {
-  notify-send "Caffeine" "Did not find ${file_yakuake_list}"
+  notify-send "Caffeine" "Did not find ${file_guake_list}"
 	exit 1
 }
 fi
