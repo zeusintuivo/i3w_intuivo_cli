@@ -56,9 +56,9 @@ function instalar() {
 	}
 	fi
 
-	echo "$0:$LINENO  mkdir -p \"${HOME}/.local/share/\" "
-	[[ -L "${HOME}/.local/share/" ]] && 	unlink "${HOME}/.local/share/"
-	[[ -e "${HOME}/.local/share/" ]] && 	rm -rf "${HOME}/.local/share/"
+	echo "$0:$LINENO  mkdir -p \"${HOME}/.local/share/i3status-rust\" "
+  [[ -L "${HOME}/.local/share/i3status-rust" ]] && unlink "${HOME}/.local/share/i3status-rust"
+  [[ -e "${HOME}/.local/share/i3status-rust" ]] && rm -rf "${HOME}/.local/share/i3status-rust"
   #v[[ ! -d "${HOME}/.local/share/" ]] &&  mkdir -p "${HOME}/.local/share/"
   [[ ! -L "${HOME}/.local/share/i3status-rust" ]] &&   ln -s "${cwd}/i3status-rust" "${HOME}/.local/share/i3status-rust"
 
