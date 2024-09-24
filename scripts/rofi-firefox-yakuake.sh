@@ -14,7 +14,7 @@ function get_uniq_by_touch() {
   fi
 
 
-	[[ ${debug-} ]] && echo "listfirefoxes1:$listfirefoxes1"
+	[[ ${DEBUG-} ]] && echo "listfirefoxes1:$listfirefoxes1"
   local listfirefoxes2=$(ls -ct1 "${targetfolder2}" | cut -d. -f2 | cut -d- -f1 )
   _err=$?
   if [ ${_err} -gt 0 ] ; then
@@ -23,7 +23,7 @@ function get_uniq_by_touch() {
   }
   fi
 
-  [[ ${debug-} ]] && echo "listfirefoxes2:$listfirefoxes2"
+  [[ ${DEBUG-} ]] && echo "listfirefoxes2:$listfirefoxes2"
 
   local listfirefoxes="${listfirefoxes1-}"
   local one two passvalue=""
@@ -38,10 +38,10 @@ function get_uniq_by_touch() {
     while read -r one; do
     {
       [[ -z "${one-}" ]] && continue
-      [[ ${debug-} ]] && echo "${two}" == "${one}"
+      [[ ${DEBUG-} ]] && echo "${two}" == "${one}"
       if [[ "${two}" == "${one}" ]] ; then
       {
-        [[ ${debug-} ]] && echo "match"
+        [[ ${DEBUG-} ]] && echo "match"
         found=1
         break
       }
@@ -56,7 +56,7 @@ function get_uniq_by_touch() {
       fi
     }
     done <<< "${listfirefoxes1-}"
-    [[ ${debug-} ]] && echo "${passvalue}"
+    [[ ${DEBUG-} ]] && echo "${passvalue}"
     if [ ${found} -eq 0 ] ; then
     {
       listfirefoxes="${listfirefoxes}

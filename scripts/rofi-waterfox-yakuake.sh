@@ -16,7 +16,7 @@ function get_uniq_by_touch() {
   fi
 
 
-	[[ ${debug-} ]] && echo "listwaterfoxes1:$listwaterfoxes1"
+	[[ ${DEBUG-} ]] && echo "listwaterfoxes1:$listwaterfoxes1"
   local listwaterfoxes2=$(ls -ct1 "${targetfolder2}" | cut -d. -f2 | cut -d- -f1 )
   _err=$?
   if [ ${_err} -gt 0 ] ; then
@@ -25,7 +25,7 @@ function get_uniq_by_touch() {
   }
   fi
 
-  [[ ${debug-} ]] && echo "listwaterfoxes2:$listwaterfoxes2"
+  [[ ${DEBUG-} ]] && echo "listwaterfoxes2:$listwaterfoxes2"
 
   local listwaterfoxes="${listwaterfoxes1-}"
   local one two passvalue=""
@@ -40,10 +40,10 @@ function get_uniq_by_touch() {
     while read -r one; do
     {
       [[ -z "${one-}" ]] && continue
-      [[ ${debug-} ]] && echo "${two}" == "${one}"
+      [[ ${DEBUG-} ]] && echo "${two}" == "${one}"
       if [[ "${two}" == "${one}" ]] ; then
       {
-        [[ ${debug-} ]] && echo "match"
+        [[ ${DEBUG-} ]] && echo "match"
         found=1
         break
       }
@@ -52,13 +52,13 @@ function get_uniq_by_touch() {
       (( counter ++ ))
       if [ ${counter} -gt 5000 ] ; then
       {
-        notify-send "caffeine" "warning list too long, exiting loop :${0}:$LINENO}"
+        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}"
         break
       }
       fi
     }
     done <<< "${listwaterfoxes1-}"
-    [[ ${debug-} ]] && echo "${passvalue}"
+    [[ ${DEBUG-} ]] && echo "${passvalue}"
     if [ ${found} -eq 0 ] ; then
     {
       listwaterfoxes="${listwaterfoxes}
@@ -67,7 +67,7 @@ ${passvalue}"
     fi
     if [ ${counter} -gt 5000 ] ; then
     {
-        notify-send "caffeine" "warning list too long, exiting loop :${0}:$LINENO}"
+        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}"
         break
     }
     fi
@@ -93,7 +93,7 @@ listwaterfoxes="$(get_uniq_by_touch)"
   _err=$?
 	if [ ${_err} -gt 0 ] ; then
 	{
-		notify-send "caffeine" "failed to run ${home}/_/software/waterfox/waterfox -p ${chosen} "
+		notify-send "caffeine" "failed to run ${HOME}/_/software/waterfox/waterfox -p ${chosen} "
 		exit 1
 	}
 	fi
