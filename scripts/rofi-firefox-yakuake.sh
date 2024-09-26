@@ -3,23 +3,23 @@
 function get_uniq_by_touch() {
   # set -u
   local -i _err=0
-	local targetfolder1="${HOME}/.cache/mozilla/firefox"
+  local targetfolder1="${HOME}/.cache/mozilla/firefox"
   local targetfolder2="${HOME}/.mozilla/firefox"
   local listfirefoxes1=$(ls -ct1 "${targetfolder1}" | cut -d. -f2 | cut -d- -f1 )
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-  	notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder1:-}"
+    notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder1:-}" &
   }
   fi
 
 
-	[[ ${DEBUG-} ]] && echo "listfirefoxes1:$listfirefoxes1"
+  [[ ${DEBUG-} ]] && echo "listfirefoxes1:$listfirefoxes1"
   local listfirefoxes2=$(ls -ct1 "${targetfolder2}" | cut -d. -f2 | cut -d- -f1 )
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-  	notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder2:-}"
+    notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder2:-}" &
   }
   fi
 
@@ -50,7 +50,7 @@ function get_uniq_by_touch() {
       (( counter ++ ))
       if [ ${counter} -gt 5000 ] ; then
       {
-        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}"
+        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}" &
         break
       }
       fi
@@ -65,17 +65,17 @@ ${passvalue}"
     fi
     if [ ${counter} -gt 5000 ] ; then
     {
-        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}"
+        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}" &
         break
     }
     fi
   }
   done <<< "${listfirefoxes2-}"
 
-	if [[ -z "${listfirefoxes:-}" ]]; then
+  if [[ -z "${listfirefoxes:-}" ]]; then
   {
-    notify-send "caffeine" "failed and got empty list from ls -1 targetfolders \n 1.${targetfolder1:-} \n 2.${targetfolder2:-}"
-  	exit 1
+    notify-send "caffeine" "failed and got empty list from ls -1 targetfolders \n 1.${targetfolder1:-} \n 2.${targetfolder2:-}" &
+    exit 1
   }
   fi
 
@@ -87,15 +87,15 @@ ${passvalue}"
 
 
 titleactivity="firefox profiles"
-notify-send -t 1000 "${titleactivity}..."
+notify-send -t 1000 "${titleactivity}..." &
 listfirefoxes="$(get_uniq_by_touch)"
   _err=$?
-	if [ ${_err} -gt 0 ] ; then
-	{
-		notify-send "caffeine" "failed to run firefox -p ${chosen} "
-		exit 1
-	}
-	fi
+  if [ ${_err} -gt 0 ] ; then
+  {
+    notify-send "caffeine" "failed to run firefox -p ${chosen} " &
+    exit 1
+  }
+  fi
 
 chosen=$(echo -n "${listfirefoxes:-}" | rofi -dmenu -i -p "${titleactivity}" -no-custom)
 if [[ -z "${chosen}" ]]; then
@@ -108,13 +108,13 @@ fi
   firefox_path_executable="firefox"
   "${firefox_path_executable}" -P "${chosen}"
   _err=$?
-	if [ ${_err} -gt 0 ] ; then
-	{
-		notify-send "Caffeine" "Failed to run ${firefox_path_executable} -P ${chosen} "
-		exit 1
-	}
+  if [ ${_err} -gt 0 ] ; then
+  {
+    notify-send "Caffeine" "Failed to run ${firefox_path_executable} -P ${chosen} " &
+    exit 1
+  }
   else
-	{
-		exit 0
-	}
-	fi
+  {
+    exit 0
+  }
+  fi

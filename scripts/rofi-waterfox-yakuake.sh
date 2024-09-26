@@ -1,6 +1,6 @@
 #!/bin/bash
 titleactivity="waterfox profiles"
-notify-send -t 1000 "${titleactivity}..."
+notify-send -t 1000 "${titleactivity}..." &
 
 function get_uniq_by_touch() {
   set -u
@@ -11,7 +11,7 @@ function get_uniq_by_touch() {
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-  	notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder1:-}"
+  	notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder1:-}" &
   }
   fi
 
@@ -21,7 +21,7 @@ function get_uniq_by_touch() {
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-  	notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder2:-}"
+  	notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder2:-}" &
   }
   fi
 
@@ -52,7 +52,7 @@ function get_uniq_by_touch() {
       (( counter ++ ))
       if [ ${counter} -gt 5000 ] ; then
       {
-        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}"
+        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}" &
         break
       }
       fi
@@ -67,7 +67,7 @@ ${passvalue}"
     fi
     if [ ${counter} -gt 5000 ] ; then
     {
-        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}"
+        notify-send "caffeine" "warning list too long, exiting loop :${0}:${LINENO}" &
         break
     }
     fi
@@ -76,7 +76,7 @@ ${passvalue}"
 
 	if [[ -z "${listwaterfoxes:-}" ]]; then
   {
-    notify-send "caffeine" "failed and got empty list from ls -1 targetfolders \n 1.${targetfolder1:-} \n 2.${targetfolder2:-}"
+    notify-send "caffeine" "failed and got empty list from ls -1 targetfolders \n 1.${targetfolder1:-} \n 2.${targetfolder2:-}" &
   	exit 1
   }
   fi
@@ -88,7 +88,7 @@ ${passvalue}"
 } # end get_uniq_by_touch
 
 titleactivity="waterfox profiles"
-notify-send -t 1000 "${titleactivity}..."
+notify-send -t 1000 "${titleactivity}..." &
 listwaterfoxes="$(get_uniq_by_touch)"
   _err=$?
 	if [ ${_err} -gt 0 ] ; then
