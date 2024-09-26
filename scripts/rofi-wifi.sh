@@ -1,7 +1,8 @@
 #!/bin/bash
 # wifi-menu
 
-Next, let’s verify that our Wi-Fi card supports AP mode:
+echo <<-EOF
+Neo t, let’s verify that our Wi-Fi card supports AP mode:
 
 $ nmcli -f WIFI-PROPERTIES.AP device show wlan0
 
@@ -178,6 +179,7 @@ psk=password
 In the command line:
 
 nmcli dev wifi show-password
+EOF
 
 
 
@@ -186,13 +188,13 @@ nmcli dev wifi show-password
 
 
 titleactivity="Getting WiFi networks"
-notify-send -t 1000 "${titleactivity}..."
+notify-send -t 1000 "${titleactivity}..." &
 raw_list_of_networks="$(nmcli dev wifi list | grep -v "^*")"
 # list_of_networks="$(nmcli -g SSID device wifi)"
 _err=$?
 if [ ${_err} -gt 0 ] ; then
 {
-  notify-send "Caffeine" "Failed command <nmcli dev wifi list> : _err:$_err _msg:$raw_list_of_networks"
+  notify-send "Caffeine" "Failed command <nmcli dev wifi list> : _err:$_err _msg:$raw_list_of_networks" &
   exit 1
 }
 fi
@@ -200,7 +202,7 @@ fi
 
 if [[ -z "${raw_list_of_networks:-}" ]] ; then
 {
-  notify-send "Caffeine" "Failed and got empty list of networks <nmcli dev wifi list>"
+  notify-send "Caffeine" "Failed and got empty list of networks <nmcli dev wifi list>" &
   exit 1
 }
 fi
@@ -211,13 +213,13 @@ fi
 # _err=$?
 # if [ ${_err} -gt 0 ] ; then
 # {
-#   notify-send "Caffeine" "Failed command <wc -l >: _err:$_err _msg:$count_response "
+#   notify-send "Caffeine" "Failed command <wc -l >: _err:$_err _msg:$count_response " &
 #   exit 1
 # }
 # fi
 # if [ ${count_response} -lt 2 ] ; then
 # {
-#   notify-send "Caffeine" "Failed count seems networks are empty <count_response=${count_response}> :list_of_networks:${list_of_networks:-}  _err:$_err _msg:$count_response "
+#   notify-send "Caffeine" "Failed count seems networks are empty <count_response=${count_response}> :list_of_networks:${list_of_networks:-}  _err:$_err _msg:$count_response " &
 #   exit 1
 # }
 # fi
@@ -226,13 +228,13 @@ fi
 # _err=$?
 # if [ ${_err} -gt 0 ] ; then
 # {
-#   notify-send "Caffeine" "Failed 2nd  command <nmcli dev wifi list> : _err:$_err _msg:$list_of_networks"
+#   notify-send "Caffeine" "Failed 2nd  command <nmcli dev wifi list> : _err:$_err _msg:$list_of_networks" &
 #   exit 1
 # }
 # fi
 # if [[ -z "${list_of_networks:-}" ]] ; then
 # {
-#   notify-send "Caffeine" "Failed 2nd and got empty list of networks <nmcli dev wifi list>"
+#   notify-send "Caffeine" "Failed 2nd and got empty list of networks <nmcli dev wifi list>" &
 #   exit 1
 # }
 # fi
@@ -250,13 +252,13 @@ fi
 # _err=$?
 # if [ ${_err} -gt 0 ] ; then
 # {
-#   notify-send "Caffeine" "Failed command <wc -l >: _err:$_err _msg:$count_response "
+#   notify-send "Caffeine" "Failed command <wc -l >: _err:$_err _msg:$count_response " &
 #   exit 1
 # }
 # fi
 # if [ ${count_response} -lt 2 ] ; then
 # {
-#   notify-send "Caffeine" "Failed count seems networks are empty <count_response=${count_response}> :list_of_networks:${list_of_networks:-}  _err:$_err _msg:$count_response "
+#   notify-send "Caffeine" "Failed count seems networks are empty <count_response=${count_response}> :list_of_networks:${list_of_networks:-}  _err:$_err _msg:$count_response " &
 #   exit 1
 # }
 # fi
@@ -265,13 +267,13 @@ fi
 # _err=$?
 # if [ ${_err} -gt 0 ] ; then
 # {
-#   notify-send "Caffeine" "Failed 2nd  command <nmcli dev wifi list> : _err:$_err _msg:$list_of_networks"
+#   notify-send "Caffeine" "Failed 2nd  command <nmcli dev wifi list> : _err:$_err _msg:$list_of_networks" &
 #   exit 1
 # }
 # fi
 # if [[ -z "${list_of_networks:-}" ]] ; then
 # {
-#   notify-send "Caffeine" "Failed 2nd and got empty list of networks <nmcli dev wifi list>"
+#   notify-send "Caffeine" "Failed 2nd and got empty list of networks <nmcli dev wifi list>" &
 #   exit 1
 # }
 # fi
@@ -301,13 +303,13 @@ done <<< "${raw_list_of_networks:-}"
 _err=$?
 if [ ${_err} -gt 0 ] ; then
 {
-  notify-send "Caffeine" "Failed command <while loop raw_list_of_networks:- >: _err:$_err _msg:$count_response "
+  notify-send "Caffeine" "Failed command <while loop raw_list_of_networks:- >: _err:$_err _msg:$count_response " &
   exit 1
 }
 fi
 if [[ -z "${list_of_networks:-}" ]] ; then
 {
-  notify-send "Caffeine" "Failed 3rd clean and got empty list of networks <nmcli dev wifi list>"
+  notify-send "Caffeine" "Failed 3rd clean and got empty list of networks <nmcli dev wifi list>" &
   exit 1
 }
 fi
@@ -328,21 +330,21 @@ if [[ -z $chosen_network ]]; then
 fi
 
 # DEBUG
-notify-send "Caffeine" "Choosen Wifi: $chosen_network"
+notify-send "Caffeine" "Choosen Wifi: $chosen_network" &
 chosen_network_name=$(echo ${chosen_network} | cut -d' ' -f2 )
 
-notify-send "Caffeine" "Choosen Wifi name: $chosen_network_name"
+notify-send "Caffeine" "Choosen Wifi name: $chosen_network_name" &
 if [[ -n $(grep $chosen_network_name <<< "${list_saved_wifi_passwords}") ]]; then
 {
 	_msg=$(nmcli connection up id $chosen_network_name)
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-		notify-send "Caffeine" "Failed command <nmcli connection up id $chosen_network_name>: _err:$_err _msg:$_msg "
+		notify-send "Caffeine" "Failed command <nmcli connection up id $chosen_network_name>: _err:$_err _msg:$_msg " &
     exit 1
   }
   fi
-  notify-send "Caffeine" "Connected: $chosen_network_name"
+  notify-send "Caffeine" "Connected: $chosen_network_name" &
 }
 else
 {
@@ -350,10 +352,10 @@ else
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-		notify-send "Caffeine" "Failed command <nmcli device wifi connect $chosen_network_name>: _err:$_err _msg:$_msg "
+		notify-send "Caffeine" "Failed command <nmcli device wifi connect $chosen_network_name>: _err:$_err _msg:$_msg " &
     exit 1
   }
   fi
-  notify-send "Caffeine" "Connected: $chosen_network_name"
+  notify-send "Caffeine" "Connected: $chosen_network_name" &
 }
 fi
