@@ -56,11 +56,11 @@ function instalar() {
   }
   fi
 
-  echo "$0:$LINENO  mkdir -p \"${HOME}/.local/share/i3status-rust\" "
+ echo "$0:$LINENO  mkdir -p \"${HOME}/.local/share/i3status-rust\" "
   [[ -L "${HOME}/.local/share/i3status-rust" ]] && unlink "${HOME}/.local/share/i3status-rust"
   [[ -e "${HOME}/.local/share/i3status-rust" ]] && rm -rf "${HOME}/.local/share/i3status-rust"
-  [[ ! -d "${HOME}/.local/share/" ]] &&  mkdir -p "${HOME}/.local/share/"
-  [[ ! -L "${HOME}/.local/share/i3status-rust" ]] &&   ln -s "${cwd}/i3status-rust" "${HOME}/.local/share/i3status-rust"
+  # [[ ! -d "${HOME}/.local/share/" ]] &&  mkdir -p "${HOME}/.local/share/"
+ [[ ! -L "${HOME}/.local/share/i3status-rust" ]] &&   ln -s "${cwd}/i3status-rust" "${HOME}/.local/share/i3status-rust"
 
   # if [[ -e "${HOME}/.local/share/i3status-rust/config.toml" ]]; then
   # {
@@ -110,5 +110,3 @@ function instalar() {
 } # end instalar
 
 instalar
-
-
