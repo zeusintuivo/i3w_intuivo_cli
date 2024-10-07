@@ -99,7 +99,7 @@ listfirefoxes="$(get_uniq_by_touch)"
   }
   fi
 
-chosen=$(echo -n "${listfirefoxes:-}" | rofi -dmenu -i -p "${titleactivity}" -no-custom)
+chosen=$(echo -n "${listfirefoxes:-}" | wofi --dmenu -i -p "${titleactivity}" --no-custom)
 if [[ -z "${chosen}" ]]; then
 {
   # If we have not chosen a network, the previous command will return an empty string

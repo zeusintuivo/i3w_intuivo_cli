@@ -22,15 +22,16 @@ if not fdict:
 else:
     width = len(max(fdict.keys(), key=len))
 
-rofi = Popen(["rofi", "-i", "-dmenu", \
-              "-l", str(lines), "-width", str(width), \
+
+wofi = Popen(["wofi", "-i", "--dmenu", \
+              "--lines", str(lines), "--width", str(width), \
               "-p", "connection"], stdout=PIPE, stdin=PIPE)
-selected = rofi.communicate("\n" \
-                            .join(sorted(fdict.keys())) \
-                            .encode("utf-8"))[0] \
+selected = wofi.communicate("\n" \
+               .join(sorted(fdict.keys())) \
+               .encode("utf-8"))[0] \
                .decode("utf-8") \
                .strip()
-rofi.wait()
+wofi.wait()
 
 r = Popen(["remmina", "-c", fdict[selected]])
 r.wait()

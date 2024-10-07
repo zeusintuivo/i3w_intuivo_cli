@@ -355,10 +355,8 @@ current_qr_wifi="
 $(qrencode  -t UTF8 'WIFI:S:<'${current_name}'>;T:WPA;P:<'${current_password}'>;;')"
 # current_qr_wifi="
 # $(qrencode  -t ASCII 'WIFI:S:<${current_name}>;T:WPA;P:<${current_password}>;;')"
-# chosen_network=$(echo -n "${list_of_networks:-}${current_qr_wifi:-}"  | wofi --dmenu -i -p "${title}"  --no-actions --gtk-dark --style "${HOME}/.config/wofi/style.css" )
 
-# chosen_network=$(echo -n "${list_of_networks:-}"  | rofi -dmenu -i -p "Wifi network" -no-custom)
-chosen_network=$(echo -n "${list_of_networks:-}${current_qr_wifi:-}"  | rofi -dmenu -i -p "${title}" -no-custom -style "${HOME}/.config/wofi/style.css" )
+chosen_network=$(echo -n "${list_of_networks:-}${current_qr_wifi:-}"  | wofi --dmenu -i -p "${title}"  --no-actions --gtk-dark --style "${HOME}/.config/wofi/style.css" -no-custom )
 # chosen_network=$(nmcli -g SSID device wifi | rofi -dmenu -i -p "Wifi network" -no-custom)
 if [[ -z $chosen_network ]]; then
     # If we have not chosen a network, the previous command will return an empty string

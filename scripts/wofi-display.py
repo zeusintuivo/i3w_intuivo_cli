@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 
 import os
 import subprocess
@@ -28,26 +28,25 @@ else:
 # .join(sorted(fdict.keys())) \
 # .encode("utf-8"))
 array_list = [
-     "rofi",
-     "-i", "-dmenu",
-     "-l", str(lines),
-     "-height", str(lines*8),
-     "-width", str(width*7),
+     "wofi",
+     "-i", "--dmenu",
+     "--lines", str(lines),
+     "--height", str(lines*8),
+     "--width", str(width*7),
      "-p", "display configuration"
      ]
-
-rofi = Popen(array_list, stdout=PIPE, stdin=PIPE)
+wofi = Popen(array_list, stdout=PIPE, stdin=PIPE)
 # flat_string = ' '.join(array_list)
 # print(flat_string)
 
-selected = rofi.communicate(
+selected = wofi.communicate(
         "\n" \
         .join(sorted(fdict.keys())) \
         .encode("utf-8"))[0] \
         .decode("utf-8") \
         .strip()
 
-rofi.wait()
+wofi.wait()
 
 r = subprocess.Popen([fdict[selected]])
 r.wait()

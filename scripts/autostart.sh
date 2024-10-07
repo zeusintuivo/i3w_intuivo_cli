@@ -2,7 +2,7 @@
 # Settings
 #
 
-keyboard_layouts="us,de,es,sp,no"
+keyboard_layouts="us,fi,no,es,de,es,pt"
 
 #
 # Desktop wallpaper
@@ -37,5 +37,3 @@ pgrep compton || compton &
 pgrep nm-applet || nm-applet &
 pgrep blueman-applet || blueman-applet &
 pgrep redshift || redshift &
-
-

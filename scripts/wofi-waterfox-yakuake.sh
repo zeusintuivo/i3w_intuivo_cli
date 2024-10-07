@@ -1,33 +1,35 @@
-#!/usr/bin/env bash
+#!/bin/bash
+titleactivity="waterfox profiles"
+notify-send -t 1000 "${titleactivity}..." &
 
 function get_uniq_by_touch() {
-  # set -u
+  set -u
   local -i _err=0
-  local targetfolder1="${HOME}/.cache/mozilla/firefox"
-  local targetfolder2="${HOME}/.mozilla/firefox"
-  local listfirefoxes1=""
-	listfirefoxes1=$(ls -ct1 "${targetfolder1}" | cut -d. -f2 | cut -d- -f1 )
+	local targetfolder1="${HOME}/.cache/waterfox"
+  local targetfolder2="${HOME}/.waterfox"
+  local listwaterfoxes1=""
+	listwaterfoxes1=$(ls -ct1 "${targetfolder1}" | cut -d. -f2 | cut -d- -f1 )
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-    notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder1:-}" &
+  	notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder1:-}" &
   }
   fi
 
 
-  [[ ${DEBUG-} ]] && echo "listfirefoxes1:$listfirefoxes1"
-  local listfirefoxes2=""
-	listfirefoxes2=$(ls -ct1 "${targetfolder2}" | cut -d. -f2 | cut -d- -f1 )
+	[[ ${DEBUG-} ]] && echo "listwaterfoxes1:$listwaterfoxes1"
+  local listwaterfoxes2=""
+	listwaterfoxes2=$(ls -ct1 "${targetfolder2}" | cut -d. -f2 | cut -d- -f1 )
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-    notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder2:-}" &
+  	notify-send "caffeine" "failed to get list from ls -1 targetfolder:${targetfolder2:-}" &
   }
   fi
 
-  [[ ${DEBUG-} ]] && echo "listfirefoxes2:$listfirefoxes2"
+  [[ ${DEBUG-} ]] && echo "listwaterfoxes2:$listwaterfoxes2"
 
-  local listfirefoxes="${listfirefoxes1-}"
+  local listwaterfoxes="${listwaterfoxes1-}"
   local one two passvalue=""
   local -i found
   local -i counter=0
@@ -57,11 +59,11 @@ function get_uniq_by_touch() {
       }
       fi
     }
-    done <<< "${listfirefoxes1-}"
+    done <<< "${listwaterfoxes1-}"
     [[ ${DEBUG-} ]] && echo "${passvalue}"
     if [ ${found} -eq 0 ] ; then
     {
-      listfirefoxes="${listfirefoxes}
+      listwaterfoxes="${listwaterfoxes}
 ${passvalue}"
     }
     fi
@@ -72,34 +74,33 @@ ${passvalue}"
     }
     fi
   }
-  done <<< "${listfirefoxes2-}"
+  done <<< "${listwaterfoxes2-}"
 
-  if [[ -z "${listfirefoxes:-}" ]]; then
+	if [[ -z "${listwaterfoxes:-}" ]]; then
   {
     notify-send "caffeine" "failed and got empty list from ls -1 targetfolders \n 1.${targetfolder1:-} \n 2.${targetfolder2:-}" &
-    exit 1
+  	exit 1
   }
   fi
 
 
 
-  echo "${listfirefoxes}" | grep -v "ini" |  uniq
+  echo "${listwaterfoxes}" | grep -v "ini" |  uniq
 
 } # end get_uniq_by_touch
 
-
-titleactivity="firefox profiles"
+titleactivity="waterfox profiles"
 notify-send -t 1000 "${titleactivity}..." &
-listfirefoxes="$(get_uniq_by_touch)"
+listwaterfoxes="$(get_uniq_by_touch)"
   _err=$?
-  if [ ${_err} -gt 0 ] ; then
-  {
-    notify-send "caffeine" "failed to run firefox -p ${chosen} " &
-    exit 1
-  }
-  fi
+	if [ ${_err} -gt 0 ] ; then
+	{
+		notify-send "caffeine" "failed to run ${HOME}/_/software/waterfox/waterfox -p ${chosen} "
+		exit 1
+	}
+	fi
 
-chosen=$(echo -n "${listfirefoxes:-}" | rofi -dmenu -i -p "${titleactivity}" -no-custom)
+chosen=$(echo -n "${listwaterfoxes:-}" | wofi --dmenu -i -p "${titleactivity}" --no-custom)
 if [[ -z "${chosen}" ]]; then
 {
   # If we have not chosen a network, the previous command will return an empty string
@@ -107,16 +108,15 @@ if [[ -z "${chosen}" ]]; then
   exit 1
 }
 fi
-  firefox_path_executable="firefox"
-  "${firefox_path_executable}" -P "${chosen}"
+  "${HOME}/_/software/waterfox/waterfox" -P "${chosen}"
   _err=$?
-  if [ ${_err} -gt 0 ] ; then
-  {
-    notify-send "Caffeine" "Failed to run ${firefox_path_executable} -P ${chosen} " &
-    exit 1
-  }
+	if [ ${_err} -gt 0 ] ; then
+	{
+		notify-send "Caffeine" "Failed to run ${HOME}/_/software/waterfox/waterfox -P ${chosen} "
+		exit 1
+	}
   else
-  {
-    exit 0
-  }
-  fi
+	{
+		exit 0
+	}
+	fi
