@@ -1,7 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
+titleactivity="firefox profiles"
+notify-send -t 1000 "${titleactivity}..." &
 
 function get_uniq_by_touch() {
-  # set -u
+  set -u
   local -i _err=0
   local targetfolder1="${HOME}/.cache/mozilla/firefox"
   local targetfolder2="${HOME}/.mozilla/firefox"
@@ -99,7 +101,7 @@ listfirefoxes="$(get_uniq_by_touch)"
   }
   fi
 
-chosen=$(echo -n "${listfirefoxes:-}" | wofi --dmenu -i -p "${titleactivity}" --no-custom)
+chosen=$(echo -n "${listfirefoxes:-}" | wofi --dmenu -i -p "${titleactivity}")
 if [[ -z "${chosen}" ]]; then
 {
   # If we have not chosen a network, the previous command will return an empty string
@@ -120,3 +122,6 @@ fi
     exit 0
   }
   fi
+
+
+#

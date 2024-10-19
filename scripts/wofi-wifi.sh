@@ -122,18 +122,18 @@ This difference results from the NetworkManager utilizing NAT (Network address t
 
 $ sudo nft list ruleset
 table ip nm-shared-wlan0 {
-	chain nat_postrouting {
-		type nat hook postrouting priority srcnat; policy accept;
-		ip saddr 192.0.1.0/24 ip daddr != 192.0.1.0/24 masquerade
-	}
-	chain filter_forward {
-		type filter hook forward priority filter; policy accept;
-		ip daddr 192.0.1.0/24 oifname "wlan0" ct state { established, related } accept
-		ip saddr 192.0.1.0/24 iifname "wlan0" accept
-		iifname "wlan0" oifname "wlan0" accept
-		iifname "wlan0" reject
-		oifname "wlan0" reject
-	}
+  chain nat_postrouting {
+    type nat hook postrouting priority srcnat; policy accept;
+    ip saddr 192.0.1.0/24 ip daddr != 192.0.1.0/24 masquerade
+  }
+  chain filter_forward {
+    type filter hook forward priority filter; policy accept;
+    ip daddr 192.0.1.0/24 oifname "wlan0" ct state { established, related } accept
+    ip saddr 192.0.1.0/24 iifname "wlan0" accept
+    iifname "wlan0" oifname "wlan0" accept
+    iifname "wlan0" reject
+    oifname "wlan0" reject
+  }
 }
 
 The NetworkManager also starts the dnsmasq service which listens on ports 67 and 53 (DHCP and DNS respectively):
@@ -203,12 +203,12 @@ current_password=""
     notify-send "Caffeine" "Warning loading current connected wifi  : _err:$_err _msg:${current_qr_wifi}" &
   }
   fi
-	if [[ -n "${current_qr_wifi}" ]] ; then
-	{
-		current_name="$(grep "^SSID:" <<< "${current_qr_wifi}" | cut -d: -f2 | xargs)"
-		current_password="$(grep "^Password:" <<< "${current_qr_wifi}" | cut -d: -f2 | xargs)"
-	}
-	fi
+  if [[ -n "${current_qr_wifi}" ]] ; then
+  {
+    current_name="$(grep "^SSID:" <<< "${current_qr_wifi}" | cut -d: -f2 | xargs)"
+    current_password="$(grep "^Password:" <<< "${current_qr_wifi}" | cut -d: -f2 | xargs)"
+  }
+  fi
 
 
 
@@ -311,17 +311,17 @@ while read -r line; do
 {
   [[ -z "${line:-}" ]] && continue
   (( count_response++ ))
-	[ ${count_response} -eq 1 ] && continue
+  [ ${count_response} -eq 1 ] && continue
   if [[ -z "${list_of_networks:-}" ]] ; then
-	{
-		list_of_networks="${line}"
-	}
+  {
+    list_of_networks="${line}"
+  }
   else
-	{
-		list_of_networks="${list_of_networks}
+  {
+    list_of_networks="${list_of_networks}
 ${line}"
-	}
-	fi
+  }
+  fi
 }
 done <<< "${raw_list_of_networks:-}"
 _err=$?
@@ -377,11 +377,11 @@ chosen_network_name=$(echo "${chosen_network}" |sed 's/  /█/g' | cut -d'█' -
 notify-send "Caffeine" "Choosen Wifi name: $chosen_network_name" &
 if grep -q "${chosen_network_name}" <<< "${list_saved_wifi_passwords}" ; then
 {
-	_msg=$(nmcli connection up id "${chosen_network_name}")
+  _msg=$(nmcli connection up id "${chosen_network_name}")
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-		notify-send "Caffeine" "Failed command <nmcli connection up id $chosen_network_name>: _err:$_err _msg:$_msg " &
+    notify-send "Caffeine" "Failed command <nmcli connection up id $chosen_network_name>: _err:$_err _msg:$_msg " &
     exit 1
   }
   fi
@@ -389,12 +389,12 @@ if grep -q "${chosen_network_name}" <<< "${list_saved_wifi_passwords}" ; then
 }
 else
 {
-	(
-	  _msg=$(nmcli device wifi connect "${chosen_network_name}")
+  (
+    _msg=$(nmcli device wifi connect "${chosen_network_name}")
     _err=$?
     if [ ${_err} -gt 0 ] ; then
     {
-	  	notify-send "Caffeine" "Failed command <nmcli device wifi connect $chosen_network_name>: _err:$_err _msg:$_msg " &
+      notify-send "Caffeine" "Failed command <nmcli device wifi connect $chosen_network_name>: _err:$_err _msg:$_msg " &
       exit 1
     }
     fi
