@@ -30,15 +30,15 @@ if [[ -z "${chosen:-}" ]]; then
   exit 1
 }
 fi
-file_yakuake_list="${HOME}/yakuake_sessions_${chosen}_list"
-if [[ -e "${file_yakuake_list}" ]]; then
+file_list="${HOME}/yakuake_sessions_${chosen}_list"
+if [[ -e "${file_list}" ]]; then
 {
-  touch "${file_yakuake_list}"
-  yakuake_sessions "${file_yakuake_list}"
+  touch "${file_list}"
+  yakuake_sessions "${file_list}"
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-    notify-send "Caffeine" "Failed to run ${file_yakuake_list}" &
+    notify-send "Caffeine" "Failed to run ${file_list}" &
     exit 1
   }
   else
@@ -49,7 +49,7 @@ if [[ -e "${file_yakuake_list}" ]]; then
 }
 else
 {
-  notify-send "Caffeine" "Did not find ${file_yakuake_list}" &
+  notify-send "Caffeine" "Did not find ${file_list}" &
   exit 1
 }
 fi

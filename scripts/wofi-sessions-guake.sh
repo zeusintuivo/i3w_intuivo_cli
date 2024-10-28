@@ -21,8 +21,8 @@ if [[ -z "${list_of_files:-}" ]] ; then
 }
 fi
 
-
-chosen=$(echo -n "${list_of_files:-}"  | wofi --dmenu -i -p "Guake session config" --no-custom)
+title="Guake session config"
+chosen=$(echo -n "${list_of_files:-}"  |wofi --dmenu -i -p "${title}" --no-actions --gtk-dark --style "${HOME}/.config/wofi/style.css" -no-custom  )
 if [[ -z "${chosen:-}" ]]; then
 {
   # If we have not chosen a network, the previous command will return an empty string
@@ -30,26 +30,26 @@ if [[ -z "${chosen:-}" ]]; then
   exit 1
 }
 fi
-file_guake_list="${HOME}/yakuake_sessions_${chosen}_list"
-if [[ -e "${file_guake_list}" ]]; then
+file_list="${HOME}/yakuake_sessions_${chosen}_list"
+if [[ -e "${file_list}" ]]; then
 {
-  touch "${file_guake_list}"
-	guake_sessions "${file_guake_list}"
+  touch "${file_list}"
+  guake_sessions "${file_list}"
   _err=$?
-	if [ ${_err} -gt 0 ] ; then
-	{
-		notify-send "Caffeine" "Failed to run ${file_guake_list}" &
-		exit 1
-	}
+  if [ ${_err} -gt 0 ] ; then
+  {
+    notify-send "Caffeine" "Failed to run ${file_list}" &
+    exit 1
+  }
   else
-	{
-		exit 0
-	}
-	fi
+  {
+    exit 0
+  }
+  fi
 }
 else
 {
-  notify-send "Caffeine" "Did not find ${file_guake_list}" &
-	exit 1
+  notify-send "Caffeine" "Did not find ${file_list}" &
+  exit 1
 }
 fi
