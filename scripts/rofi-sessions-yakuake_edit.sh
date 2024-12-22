@@ -1,6 +1,6 @@
 #!/bin/bash
 
-titleactivity="Session list configurations"
+titleactivity="Edit yakuakes configurations"
 notify-send -t 1000 "${titleactivity}..." &
 targetfolder="${HOME}/yakuake_sessions_*_list"
 # ls -ct1 "${HOME}/yakuake_sessions_*_list" | cut -d_ -f3
@@ -21,7 +21,7 @@ if [[ -z "${list_of_files:-}" ]] ; then
 }
 fi
 
-title="Yakuake session config"
+title="Yakuake edit config"
 chosen=$(echo -n "${list_of_files:-}"  | rofi -dmenu -i -p "Yakuake session config" -no-custom)
 if [[ -z "${chosen:-}" ]]; then
 {
@@ -33,8 +33,9 @@ fi
 file_list="${HOME}/yakuake_sessions_${chosen}_list"
 if [[ -e "${file_list}" ]]; then
 {
-  touch "${file_list}"
-  yakuake_sessions "${file_list}"
+  touch "${file_list}" # touch to change the modification date
+  # emacs  "${file_list}"
+  kitty --name ipythonterm -o font_size=14 -e vim "${file_list}"
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {

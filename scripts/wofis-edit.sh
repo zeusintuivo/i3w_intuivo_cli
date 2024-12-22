@@ -38,7 +38,7 @@ if [[ -e "${file_list}" ]]; then
   touch "${file_list}" # touch to change the modification date
   # emacs  "${file_list}"
   kitty --name ipythonterm -o font_size=14 -e vim "${file_list}"
- 	_err=$?
+  _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
     notify-send "Caffeine" "Failed to run ${file_list}" &

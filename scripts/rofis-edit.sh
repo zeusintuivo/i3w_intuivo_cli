@@ -1,12 +1,12 @@
 #!/bin/bash
 
-titleactivity="Session list configurations"
+titleactivity="Edit wofi/rofi configurations"
 notify-send -t 1000 "${titleactivity}..." &
-targetfolder="${HOME}/yakuake_sessions_*_list"
+targetfolder="${HOME}/_/clis/i3w_intuivo_cli/scripts/*"
 # ls -ct1 "${HOME}/yakuake_sessions_*_list" | cut -d_ -f3
 # list_of_files=$(ls -ct1 "${targetfolder}" | cut -d_ -f3 )
 list_of_files=""
-list_of_files=$(ls -ct1 "${HOME}"/yakuake_sessions_*_list | sed 's/_list//g' | cut -d_ -f3-  )
+list_of_files=$(ls -ct1 "${HOME}/_/clis/i3w_intuivo_cli/scripts"/* )
 _err=$?
 if [ ${_err} -gt 0 ] ; then
 {
@@ -21,7 +21,7 @@ if [[ -z "${list_of_files:-}" ]] ; then
 }
 fi
 
-title="Yakuake session config"
+title="Script to vim edit"
 chosen=$(echo -n "${list_of_files:-}"  | rofi -dmenu -i -p "Yakuake session config" -no-custom)
 if [[ -z "${chosen:-}" ]]; then
 {
@@ -30,11 +30,14 @@ if [[ -z "${chosen:-}" ]]; then
   exit 1
 }
 fi
-file_list="${HOME}/yakuake_sessions_${chosen}_list"
+# file_list="${HOME}/yakuake_sessions_${chosen}_list"
+# file_list="${HOME}/_/clis/i3w_intuivo_cli/scripts/${chosen}"
+file_list="${chosen}"
 if [[ -e "${file_list}" ]]; then
 {
-  touch "${file_list}"
-  yakuake_sessions "${file_list}"
+  touch "${file_list}" # touch to change the modification date
+  # emacs  "${file_list}"
+  kitty --name ipythonterm -o font_size=14 -e vim "${file_list}"
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
