@@ -110,7 +110,7 @@ if [[ -z "${chosen}" ]]; then
 }
 fi
   firefox_path_executable="firefox"
-  "${firefox_path_executable}" -P "${chosen}"
+  "${firefox_path_executable}" -P "${chosen}" &
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {

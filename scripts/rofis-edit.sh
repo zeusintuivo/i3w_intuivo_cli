@@ -22,7 +22,7 @@ if [[ -z "${list_of_files:-}" ]] ; then
 fi
 
 title="Script to vim edit"
-chosen=$(echo -n "${list_of_files:-}"  | rofi -dmenu -i -p "Yakuake session config" -no-custom)
+chosen=$(echo -n "${list_of_files:-}"  | rofi -dmenu -i -p "${titleactivity}" -no-custom)
 if [[ -z "${chosen:-}" ]]; then
 {
   # If we have not chosen a network, the previous command will return an empty string

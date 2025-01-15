@@ -96,7 +96,7 @@ listwaterfoxes="$(get_uniq_by_touch)"
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-    notify-send "caffeine" "failed to run ${HOME}/_/software/waterfox/waterfox -p ${chosen} "
+    notify-send "caffeine" "failed to run ${HOME}/_/software/waterfox/waterfox -p ${chosen} " &
     exit 1
   }
   fi
@@ -109,11 +109,11 @@ if [[ -z "${chosen}" ]]; then
   exit 1
 }
 fi
-  "${HOME}/_/software/waterfox/waterfox" -P "${chosen}"
+  "${HOME}/_/software/waterfox/waterfox" -P "${chosen}" &
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
-    notify-send "Caffeine" "Failed to run ${HOME}/_/software/waterfox/waterfox -P ${chosen} "
+    notify-send "Caffeine" "Failed to run ${HOME}/_/software/waterfox/waterfox -P ${chosen} " &
     exit 1
   }
   else

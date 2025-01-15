@@ -21,8 +21,8 @@ if [[ -z "${list_of_files:-}" ]] ; then
 }
 fi
 
-title="Script to vim edit"
-chosen=$(echo -n "${list_of_files:-}"  |wofi --dmenu -i -p "${title}" --no-actions --gtk-dark --style "${HOME}/.config/wofi/style.css" -no-custom  )
+
+chosen=$(echo -n "${list_of_files:-}"  |wofi --dmenu -i -p "${titleactivity}" --no-actions --gtk-dark --style "${HOME}/.config/wofi/style.css" -no-custom  )
 if [[ -z "${chosen:-}" ]]; then
 {
   # If we have not chosen a network, the previous command will return an empty string

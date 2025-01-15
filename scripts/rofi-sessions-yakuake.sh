@@ -34,7 +34,7 @@ file_list="${HOME}/yakuake_sessions_${chosen}_list"
 if [[ -e "${file_list}" ]]; then
 {
   touch "${file_list}"
-  yakuake_sessions "${file_list}"
+  yakuake_sessions "${file_list}" &
   _err=$?
   if [ ${_err} -gt 0 ] ; then
   {
