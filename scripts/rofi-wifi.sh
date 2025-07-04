@@ -361,6 +361,13 @@ declare title="Wifi networks available sorted by strength"
 if [[ -n "${current_name}" ]] ; then
 {
   title="Connected:${current_bssid:-} ${current_name} PASS:${current_password:-}"
+  # if ( command -v xclip  >/dev/null 2>&1; )  ; then
+  # {
+	# 	(
+	#     echo "${current_password}" | xclip
+	# 	) &
+	# }
+  # fi
 }
 fi
 
